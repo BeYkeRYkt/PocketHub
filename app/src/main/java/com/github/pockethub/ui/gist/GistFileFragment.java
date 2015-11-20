@@ -19,7 +19,9 @@ import static com.github.pockethub.Intents.EXTRA_GIST_FILE;
 import static com.github.pockethub.Intents.EXTRA_GIST_ID;
 import static com.github.pockethub.util.PreferenceUtils.WRAP;
 import android.accounts.Account;
+import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.os.Bundle;
@@ -70,8 +72,8 @@ public class GistFileFragment extends DialogFragment implements
     private MenuItem wrapItem;
 
     @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
+    public void onAttach(Context context) {
+        super.onAttach(context);
 
         gistId = getStringExtra(EXTRA_GIST_ID);
     }
@@ -118,6 +120,7 @@ public class GistFileFragment extends DialogFragment implements
                 wrapItem.setTitle(R.string.enable_wrapping);
     }
 
+    @SuppressLint("CommitPrefEdits")
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -182,7 +185,7 @@ public class GistFileFragment extends DialogFragment implements
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.gist_file_view, null);
+        return inflater.inflate(R.layout.gist_file_view, container, false);
     }
 
     @Override
